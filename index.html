@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPK Financial & Loan Services | Trusted Loan Partner</title>
+    <meta name="description" content="Get the best loans from top banks. Personal, Business, Home, Mortgage, MSME, Education loans and more. Fast approval, low interest rates.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0B3C5D',
+                        secondary: '#1a5f8a',
+                        accent: '#D4AF37',
+                        accentHover: '#B8960C',
+                        dark: '#0a1929',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        
+        .glass-dark {
+            background: rgba(11, 60, 93, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(11, 60, 93, 0.2), 0 0 20px rgba(212, 175, 55, 0.1);
+            transform: translateY(-8px);
+        }
+        
+        /* Parallax */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        @media (max-width: 768px) {
+            .parallax {
+                background-attachment: scroll;
+            }
+        }
+        
+        /* Bank Logo Marquee */
+        .marquee-container {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .marquee-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+        
+        .marquee-container:hover .marquee-track {
+            animation-play-state: paused;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .bank-logo {
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.4s ease;
+        }
+        
+        .bank-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Button Ripple */
+        .btn-ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-ripple::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-ripple:active::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+        
+        /* Floating WhatsApp */
+        .float-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            animation: float-bounce 2s infinite;
+        }
+        
+        @keyframes float-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #0B3C5D;
+            border-radius: 4px;
+        }
+        
+        /* Testimonial Slider */
+        .testimonial-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Success Popup */
+        .success-popup {
+            position: fixed;
+            top: 20px;
+            right: -400px;
+            z-index: 9999;
+            transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .success-popup.show {
+            right: 20px;
+        }
+        
+        /* Sticky Mobile CTA */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .sticky-cta.visible {
+            transform: translateY(0);
+        }
+        
+        @media (min-width: 769px) {
+            .sticky-cta {
+                display: none;
+            }
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #D4AF37 0%, #F4E4BC 50%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Hero Overlay Gradient */
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(11, 60, 93, 0.95) 0%, rgba(11, 60, 93, 0.7) 50%, rgba(11, 60, 93, 0.4) 100%);
+        }
+        
+        /* Counter Animation */
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        /* Nav Link Hover */
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4AF37;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Input Focus */
+        .glass-input:focus {
+            outline: none;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Success Popup -->
+    <div id="successPopup" class="success-popup glass-dark text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 max-w-sm">
+        <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-check text-white"></i>
+        </div>
+        <div>
+            <h4 class="font-bold text-sm">Application Submitted!</h4>
+            <p class="text-xs text-gray-300 mt-1">We'll contact you shortly. A confirmation has been sent to your WhatsApp.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 top-0">
+        <div class="glass border-b border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center text-primary font-bold text-xl shadow-lg">
+                            SPK
+                        </div>
+                        <div class="hidden sm:block">
+                            <h1 class="text-white font-bold text-lg leading-tight">SPK Financial</h1>
+                            <p class="text-white/70 text-xs">Loan Services</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:flex items-center gap-8">
+                        <a href="#services" class="nav-link text-white/90 hover:text-white text-sm font-medium transition-colors">Services</a>
+                        <a href="#why-us" class="nav-link text-white/90 hover:text-white text-sm font-medium transition-colors">Why Us</a>
+                        <a href="#testimonials" class="nav-link text-white/90 hover:text-white text-sm font-medium transition-colors">Testimonials</a>
+                        <a href="#contact" class="nav-link text-white/90 hover:text-white text-sm font-medium transition-colors">Contact</a>
+                        <button onclick="openModal()" class="btn-ripple bg-accent hover:bg-accentHover text-primary font-bold px-6 py-2.5 rounded-full text-sm transition-all shadow-lg hover:shadow-xl transform hover:scale-105">
+                            Apply Now
+                        </button>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-white p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden border-t border-white/10 bg-primary/95 backdrop-blur-xl">
+                <div class="px-4 py-6 space-y-4">
+                    <a href="#services" onclick="toggleMobileMenu()" class="block text-white/90 hover:text-white py-2">Services</a>
+                    <a href="#why-us" onclick="toggleMobileMenu()" class="block text-white/90 hover:text-white py-2">Why Us</a>
+                    <a href="#testimonials" onclick="toggleMobileMenu()" class="block text-white/90 hover:text-white py-2">Testimonials</a>
+                    <a href="#contact" onclick="toggleMobileMenu()" class="block text-white/90 hover:text-white py-2">Contact</a>
+                    <button onclick="openModal(); toggleMobileMenu();" class="w-full btn-ripple bg-accent text-primary font-bold px-6 py-3 rounded-full mt-4">
+                        Apply Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center parallax" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+        <div class="hero-overlay absolute inset-0"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-white/90 text-sm mb-6">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        Trusted by 1000+ Customers
+                    </div>
+                    
+                    <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+                        Looking for a <span class="gradient-text">Loan?</span>
+                    </h1>
+                    
+                    <p class="text-xl text-white/80 mb-8 max-w-lg leading-relaxed">
+                        We help you get the best loan from top banks. Quick approval, low interest rates, and expert guidance at every step.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="openModal()" class="btn-ripple bg-accent hover:bg-accentHover text-primary font-bold px-8 py-4 rounded-full text-lg transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 flex items-center gap-2">
+                            <span>Apply Now</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        
+                        <a href="https://wa.me/916380463408?text=Hi%20SPK%20Financial,%20I'm%20interested%20in%20getting%20a%20loan." target="_blank" class="btn-ripple glass text-white font-bold px-8 py-4 rounded-full text-lg transition-all hover:bg-white/20 flex items-center gap-2">
+                            <i class="fab fa-whatsapp text-green-400 text-xl"></i>
+                            <span>WhatsApp Us</span>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-12 flex items-center gap-8">
+                        <div>
+                            <p class="text-3xl font-bold text-white counter" data-target="1000">0</p>
+                            <p class="text-white/60 text-sm">Happy Customers</p>
+                        </div>
+                        <div class="w-px h-12 bg-white/20"></div>
+                        <div>
+                            <p class="text-3xl font-bold text-white counter" data-target="14">0</p>
+                            <p class="text-white/60 text-sm">Partner Banks</p>
+                        </div>
+                        <div class="w-px h-12 bg-white/20"></div>
+                        <div>
+                            <p class="text-3xl font-bold text-white counter" data-target="99">0</p>
+                            <p class="text-white/60 text-sm">% Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:block fade-up" style="transition-delay: 0.2s;">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-accent/20 rounded-3xl blur-2xl"></div>
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Family Home" class="relative rounded-2xl shadow-2xl w-full object-cover h-[500px]">
+                        
+                        <!-- Floating Card -->
+                        <div class="absolute -bottom-6 -left-6 glass p-4 rounded-xl shadow-xl max-w-xs">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-bold text-sm">Loan Approved!</p>
+                                    <p class="text-white/70 text-xs">Just now from HDFC Bank</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-white/50 text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+        <!-- Background Decoration -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 fade-up">
+                <span class="text-accent font-bold text-sm uppercase tracking-wider">Our Services</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary mt-3 mb-4">Loan Solutions for Every Need</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">From personal dreams to business growth, we provide comprehensive loan services tailored to your requirements.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Service Cards -->
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('Personal Loan')">
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-4 text-primary text-2xl">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">Personal Loan</h3>
+                    <p class="text-gray-600 text-sm">Quick funds for personal needs with minimal documentation.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('Business Loan')">
+                    <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-4 text-green-600 text-2xl">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">Business Loan</h3>
+                    <p class="text-gray-600 text-sm">Fuel your business growth with flexible financing options.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('Home Loan')">
+                    <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-4 text-orange-600 text-2xl">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">Home Loan</h3>
+                    <p class="text-gray-600 text-sm">Make your dream home a reality with low interest rates.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('Mortgage Loan')">
+                    <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-4 text-purple-600 text-2xl">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">Mortgage Loan</h3>
+                    <p class="text-gray-600 text-sm">Leverage your property value for substantial funding.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('MSME Loan')">
+                    <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center mb-4 text-teal-600 text-2xl">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">MSME Loan</h3>
+                    <p class="text-gray-600 text-sm">Specialized financing for micro, small & medium enterprises.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('Educational Loan')">
+                    <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mb-4 text-red-600 text-2xl">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">Educational Loan</h3>
+                    <p class="text-gray-600 text-sm">Invest in education with student-friendly repayment plans.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('Working Capital')">
+                    <div class="w-14 h-14 bg-yellow-100 rounded-xl flex items-center justify-center mb-4 text-yellow-600 text-2xl">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">Working Capital</h3>
+                    <p class="text-gray-600 text-sm">Maintain cash flow and fund daily business operations.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('OD & CC')">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-4 text-indigo-600 text-2xl">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">OD & CC</h3>
+                    <p class="text-gray-600 text-sm">Overdraft and cash credit facilities for flexible banking.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('Project Funding')">
+                    <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-4 text-pink-600 text-2xl">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">Project Funding</h3>
+                    <p class="text-gray-600 text-sm">Complete project financing from inception to completion.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('Real Estate Loan')">
+                    <div class="w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center mb-4 text-cyan-600 text-2xl">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">Real Estate Loan</h3>
+                    <p class="text-gray-600 text-sm">Finance for property purchase, development, and investment.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('NRI Loans')">
+                    <div class="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center mb-4 text-emerald-600 text-2xl">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">NRI Loans</h3>
+                    <p class="text-gray-600 text-sm">Specialized loan products for non-resident Indians.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-6 fade-up cursor-pointer" onclick="openModalWithType('Construction Loan')">
+                    <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center mb-4 text-amber-600 text-2xl">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-primary mb-2">Construction Loan</h3>
+                    <p class="text-gray-600 text-sm">Fund your construction projects with structured disbursement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner Banks Section -->
+    <section class="py-20 bg-primary relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+            <div class="text-center fade-up">
+                <span class="text-accent font-bold text-sm uppercase tracking-wider">Trusted Partners</span>
+                <h2 class="font-serif text-4xl font-bold text-white mt-3">Associated with Leading Banks</h2>
+            </div>
+        </div>
+        
+        <div class="marquee-container py-8">
+            <div class="marquee-track">
+                <!-- First set -->
+                <div class="flex items-center gap-16 px-8">
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">HDFC Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">State Bank of India</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">ICICI Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">Axis Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">IndusInd Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">IDFC FIRST Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">Bank of India</div>
+                </div>
+                <div class="flex items-center gap-16 px-8">
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">Repco Home Finance</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">LIC Housing Finance</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">Tata Capital</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">Piramal Finance</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">L&T Finance</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">DCB Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">CSB Bank</div>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="flex items-center gap-16 px-8">
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">HDFC Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">State Bank of India</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">ICICI Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">Axis Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">IndusInd Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">IDFC FIRST Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">Bank of India</div>
+                </div>
+                <div class="flex items-center gap-16 px-8">
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">Repco Home Finance</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">LIC Housing Finance</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">Tata Capital</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">Piramal Finance</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">L&T Finance</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">DCB Bank</div>
+                    <div class="bank-logo h-12 w-40 bg-white/10 rounded-lg flex items-center justify-center text-white font-bold text-sm px-4">CSB Bank</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="why-us" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-up">
+                <span class="text-accent font-bold text-sm uppercase tracking-wider">Why Choose Us</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary mt-3 mb-4">Your Trusted Financial Partner</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-card rounded-2xl p-8 text-center fade-up">
+                    <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4 text-accent text-2xl">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="font-bold text-xl text-primary mb-2">Fast Approval</h3>
+                    <p class="text-gray-600 text-sm">Quick processing with minimal documentation. Get approved in 24-48 hours.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-8 text-center fade-up" style="transition-delay: 0.1s;">
+                    <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4 text-accent text-2xl">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3 class="font-bold text-xl text-primary mb-2">Low Interest Rates</h3>
+                    <p class="text-gray-600 text-sm">Competitive rates starting from 8.5% p.a. across all loan categories.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-8 text-center fade-up" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4 text-accent text-2xl">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="font-bold text-xl text-primary mb-2">All Profiles Accepted</h3>
+                    <p class="text-gray-600 text-sm">We work with all credit profiles and income types to find you the best deal.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-8 text-center fade-up" style="transition-delay: 0.3s;">
+                    <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4 text-accent text-2xl">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="font-bold text-xl text-primary mb-2">Expert Guidance</h3>
+                    <p class="text-gray-600 text-sm">Dedicated relationship managers to guide you through every step.</p>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 fade-up">
+                <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-primary to-secondary text-white">
+                    <p class="text-4xl font-bold mb-1 counter" data-target="1000">0</p>
+                    <p class="text-white/80 text-sm">Customers Served</p>
+                </div>
+                <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-primary to-secondary text-white">
+                    <p class="text-4xl font-bold mb-1 counter" data-target="50">0</p>
+                    <p class="text-white/80 text-sm">Crores Disbursed</p>
+                </div>
+                <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-primary to-secondary text-white">
+                    <p class="text-4xl font-bold mb-1 counter" data-target="14">0</p>
+                    <p class="text-white/80 text-sm">Partner Banks</p>
+                </div>
+                <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-primary to-secondary text-white">
+                    <p class="text-4xl font-bold mb-1 counter" data-target="99">0</p>
+                    <p class="text-white/80 text-sm">% Success Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax CTA Banner -->
+    <section class="parallax py-32 relative" style="background-image: url('https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+        <div class="absolute inset-0 bg-primary/80"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center fade-up">
+            <h2 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6">Your Trusted Loan Partner</h2>
+            <p class="text-xl text-white/80 mb-10 max-w-2xl mx-auto">Let us help you achieve your financial goals with the best loan products from India's leading banks.</p>
+            <button onclick="openModal()" class="btn-ripple bg-accent hover:bg-accentHover text-primary font-bold px-10 py-4 rounded-full text-lg transition-all shadow-xl hover:shadow-2xl transform hover:scale-105">
+                Apply Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-up">
+                <span class="text-accent font-bold text-sm uppercase tracking-wider">Testimonials</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary mt-3 mb-4">What Our Customers Say</h2>
+            </div>
+            
+            <div class="relative overflow-hidden fade-up">
+                <div id="testimonialSlider" class="testimonial-slider gap-6">
+                    <!-- Testimonial 1 -->
+                    <div class="min-w-full md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] glass-card rounded-2xl p-8">
+                        <div class="flex items-center gap-1 text-accent mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-700 mb-6 italic">"SPK Financial made my home loan process incredibly smooth. They got me the best rate from HDFC Bank and handled all the paperwork. Highly recommended!"</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">RK</div>
+                            <div>
+                                <p class="font-bold text-primary">Ravi Kumar</p>
+                                <p class="text-sm text-gray-500">Home Loan Customer</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="min-w-full md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] glass-card rounded-2xl p-8">
+                        <div class="flex items-center gap-1 text-accent mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-700 mb-6 italic">"I needed urgent business capital and SPK delivered within 3 days. Their team is professional and understands business needs perfectly."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white font-bold">SP</div>
+                            <div>
+                                <p class="font-bold text-primary">Suresh Patel</p>
+                                <p class="text-sm text-gray-500">Business Loan Customer</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="min-w-full md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] glass-card rounded-2xl p-8">
+                        <div class="flex items-center gap-1 text-accent mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="text-gray-700 mb-6 italic">"As an NRI, I was worried about getting a loan in India. SPK made it seamless with their NRI loan expertise. Great service!"</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-primary font-bold">AM</div>
+                            <div>
+                                <p class="font-bold text-primary">Anita Menon</p>
+                                <p class="text-sm text-gray-500">NRI Loan Customer</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 4 -->
+                    <div class="min-w-full md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] glass-card rounded-2xl p-8">
+                        <div class="flex items-center gap-1 text-accent mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-700 mb-6 italic">"The team helped me consolidate my debts with a personal loan at a much lower interest rate. Saved me a lot of money monthly."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">VS</div>
+                            <div>
+                                <p class="font-bold text-primary">Vijay Sharma</p>
+                                <p class="text-sm text-gray-500">Personal Loan Customer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slider Controls -->
+                <div class="flex justify-center gap-4 mt-8">
+                    <button onclick="moveSlider(-1)" class="w-12 h-12 rounded-full glass hover:bg-primary hover:text-white transition-all flex items-center justify-center text-primary">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button onclick="moveSlider(1)" class="w-12 h-12 rounded-full glass hover:bg-primary hover:text-white transition-all flex items-center justify-center text-primary">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="fade-up">
+                    <span class="text-accent font-bold text-sm uppercase tracking-wider">Contact Us</span>
+                    <h2 class="font-serif text-4xl font-bold text-primary mt-3 mb-6">Get in Touch</h2>
+                    <p class="text-gray-600 mb-8 text-lg">Visit our office or reach out to us directly. We're here to help you with all your loan requirements.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary mb-1">Address</h4>
+                                <p class="text-gray-600">SPK Financial & Loan Services<br>4/402B Ganganagar<br>Thuraiyur Road<br>Namakkal – 637002</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary mb-1">Phone</h4>
+                                <a href="tel:+919788417603" class="text-gray-600 hover:text-primary transition-colors">+91 97884 17603</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center text-green-600 flex-shrink-0">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary mb-1">WhatsApp</h4>
+                                <a href="https://wa.me/916380463408" target="_blank" class="text-gray-600 hover:text-green-600 transition-colors">+91 63804 63408</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10 flex gap-4">
+                        <a href="tel:+919788417603" class="btn-ripple flex-1 bg-primary hover:bg-secondary text-white font-bold px-6 py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+                            <i class="fas fa-phone"></i>
+                            <span>Call Now</span>
+                        </a>
+                        <a href="https://wa.me/916380463408" target="_blank" class="btn-ripple flex-1 bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="fade-up" style="transition-delay: 0.2s;">
+                    <div class="rounded-2xl overflow-hidden shadow-2xl h-full min-h-[400px]">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.1234567890123!2d78.12345678901234!3d11.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDA3JzI0LjQiTiA3OMKwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; min-height: 400px;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center text-primary font-bold text-xl">SPK</div>
+                        <div>
+                            <h3 class="font-bold text-lg">SPK Financial</h3>
+                            <p class="text-white/60 text-xs">Loan Services</p>
+                        </div>
+                    </div>
+                    <p class="text-white/70 text-sm leading-relaxed">Your trusted partner for all loan requirements. We connect you with the best banks for quick approvals and low interest rates.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-white/70 hover:text-accent transition-colors text-sm">Services</a></li>
+                        <li><a href="#why-us" class="text-white/70 hover:text-accent transition-colors text-sm">Why Choose Us</a></li>
+                        <li><a href="#testimonials" class="text-white/70 hover:text-accent transition-colors text-sm">Testimonials</a></li>
+                        <li><a href="#contact" class="text-white/70 hover:text-accent transition-colors text-sm">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Loan Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" onclick="openModalWithType('Personal Loan')" class="text-white/70 hover:text-accent transition-colors text-sm">Personal Loan</a></li>
+                        <li><a href="#" onclick="openModalWithType('Home Loan')" class="text-white/70 hover:text-accent transition-colors text-sm">Home Loan</a></li>
+                        <li><a href="#" onclick="openModalWithType('Business Loan')" class="text-white/70 hover:text-accent transition-colors text-sm">Business Loan</a></li>
+                        <li><a href="#" onclick="openModalWithType('MSME Loan')" class="text-white/70 hover:text-accent transition-colors text-sm">MSME Loan</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Contact</h4>
+                    <ul class="space-y-3">
+                        <li class="text-white/70 text-sm flex items-start gap-2">
+                            <i class="fas fa-map-marker-alt mt-1 text-accent"></i>
+                            <span>4/402B Ganganagar, Thuraiyur Road, Namakkal – 637002</span>
+                        </li>
+                        <li class="text-white/70 text-sm flex items-center gap-2">
+                            <i class="fas fa-phone text-accent"></i>
+                            <a href="tel:+919788417603" class="hover:text-accent transition-colors">+91 97884 17603</a>
+                        </li>
+                        <li class="text-white/70 text-sm flex items-center gap-2">
+                            <i class="fab fa-whatsapp text-accent"></i>
+                            <a href="https://wa.me/916380463408" target="_blank" class="hover:text-accent transition-colors">+91 63804 63408</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="flex gap-4 mt-6">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-accent flex items-center justify-center transition-all text-white hover:text-primary">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-accent flex items-center justify-center transition-all text-white hover:text-primary">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 hover:bg-accent flex items-center justify-center transition-all text-white hover:text-primary">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/50 text-sm">© 2026 SPK Financial & Loan Services. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-white/50 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-white/50 hover:text-white text-sm transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/916380463408?text=Hi%20SPK%20Financial,%20I'm%20interested%20in%20getting%20a%20loan." target="_blank" class="float-whatsapp w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full shadow-2xl flex items-center justify-center text-white text-3xl transition-all hover:scale-110 z-50">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Sticky Mobile CTA -->
+    <div id="stickyCta" class="sticky-cta bg-white border-t border-gray-200 p-4 shadow-2xl md:hidden">
+        <div class="flex gap-3">
+            <a href="tel:+919788417603" class="flex-1 bg-primary text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2">
+                <i class="fas fa-phone"></i>
+                <span>Call Now</span>
+            </a>
+            <button onclick="openModal()" class="flex-1 bg-accent text-primary font-bold py-3 rounded-xl flex items-center justify-center gap-2">
+                <span>Apply Now</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Lead Capture Modal -->
+    <div id="leadModal" class="modal-overlay fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div class="modal-content glass bg-white/95 w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden">
+            <div class="bg-gradient-to-r from-primary to-secondary p-6 relative">
+                <h3 class="text-2xl font-bold text-white font-serif">Apply for Loan</h3>
+                <p class="text-white/80 text-sm mt-1">Fill in your details and we'll contact you shortly</p>
+                <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white transition-all">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="leadForm" class="p-6 space-y-5" onsubmit="handleSubmit(event)">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                    <input type="text" id="name" required class="glass-input w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm transition-all" placeholder="Enter your full name">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                    <input type="tel" id="phone" required pattern="[0-9]{10}" class="glass-input w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm transition-all" placeholder="10-digit mobile number">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Loan Type</label>
+                    <select id="loanType" required class="glass-input w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm transition-all">
+                        <option value="">Select Loan Type</option>
+                        <option value="Personal Loan">Personal Loan</option>
+                        <option value="Business Loan">Business Loan</option>
+                        <option value="Home Loan">Home Loan</option>
+                        <option value="Mortgage Loan">Mortgage Loan</option>
+                        <option value="MSME Loan">MSME Loan</option>
+                        <option value="Educational Loan">Educational Loan</option>
+                        <option value="Working Capital">Working Capital</option>
+                        <option value="OD & CC">OD & CC</option>
+                        <option value="Project Funding">Project Funding</option>
+                        <option value="Real Estate Loan">Real Estate Loan</option>
+                        <option value="NRI Loans">NRI Loans</option>
+                        <option value="Construction Loan">Construction Loan</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">City</label>
+                    <input type="text" id="city" required class="glass-input w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm transition-all" placeholder="Enter your city">
+                </div>
+                
+                <button type="submit" id="submitBtn" class="btn-ripple w-full bg-accent hover:bg-accentHover text-primary font-bold py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2">
+                    <span id="btnText">Submit Application</span>
+                    <div id="btnSpinner" class="spinner"></div>
+                </button>
+                
+                <p class="text-xs text-center text-gray-500">By submitting, you agree to receive WhatsApp confirmation and callback from our team.</p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+        
+        // Navbar Scroll Effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const stickyCta = document.getElementById('stickyCta');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+            
+            // Show sticky CTA on mobile after scrolling
+            if (currentScroll > 500 && window.innerWidth < 768) {
+                stickyCta.classList.add('visible');
+            } else {
+                stickyCta.classList.remove('visible');
+            }
+            
+            lastScroll = currentScroll;
+        });
+        
+        // Modal Functions
+        function openModal() {
+            document.getElementById('leadModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function openModalWithType(type) {
+            openModal();
+            document.getElementById('loanType').value = type;
+        }
+        
+        function closeModal() {
+            document.getElementById('leadModal').classList.remove('active');
+            document.body.style.overflow = '';
+            resetForm();
+        }
+        
+        // Close modal on overlay click
+        document.getElementById('leadModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+        
+        // Form Handling
+        function resetForm() {
+            document.getElementById('leadForm').reset();
+            document.getElementById('btnText').textContent = 'Submit Application';
+            document.getElementById('btnSpinner').style.display = 'none';
+            document.getElementById('submitBtn').disabled = false;
+        }
+        
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const loanType = document.getElementById('loanType').value;
+            const city = document.getElementById('city').value;
+            
+            // Show loading
+            document.getElementById('btnText').textContent = 'Processing...';
+            document.getElementById('btnSpinner').style.display = 'block';
+            document.getElementById('submitBtn').disabled = true;
+            
+            // Simulate processing
+            setTimeout(() => {
+                // Send WhatsApp to business
+                const businessMessage = `New Loan Lead:%0AName: ${name}%0APhone: ${phone}%0ALoan Type: ${loanType}%0ACity: ${city}`;
+                const businessWhatsApp = `https://wa.me/916380463408?text=${businessMessage}`;
+                
+                // Send confirmation to customer
+                const customerMessage = `Thank you ${name} for applying for ${loanType} with SPK Financial & Loan Services. We have received your application and our team will contact you shortly at ${phone}.%0A%0ARegards,%0ASPK Financial Team`;
+                const customerWhatsApp = `https://wa.me/91${phone}?text=${customerMessage}`;
+                
+                // Open business WhatsApp in new tab
+                window.open(businessWhatsApp, '_blank');
+                
+                // Open customer confirmation after short delay
+                setTimeout(() => {
+                    window.open(customerWhatsApp, '_blank');
+                }, 1000);
+                
+                // Show success popup
+                closeModal();
+                showSuccessPopup();
+            }, 1500);
+        }
+        
+        function showSuccessPopup() {
+            const popup = document.getElementById('successPopup');
+            popup.classList.add('show');
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Trigger counters if present
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => animateCounter(counter));
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-up, .scale-in').forEach(el => observer.observe(el));
+        
+        // Counter Animation
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    el.textContent = target + (target === 1000 ? '+' : target === 99 ? '%' : target === 50 ? 'Cr+' : '+');
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+        
+        // Testimonial Slider
+        let sliderPosition = 0;
+        const slider = document.getElementById('testimonialSlider');
+        
+        function moveSlider(direction) {
+            const cards = slider.children;
+            const cardWidth = cards[0].offsetWidth + 24; // gap
+            const maxPosition = -(cards.length - 1) * cardWidth;
+            
+            sliderPosition += direction * -cardWidth;
+            
+            if (sliderPosition > 0) sliderPosition = maxPosition;
+            if (sliderPosition < maxPosition) sliderPosition = 0;
+            
+            slider.style.transform = `translateX(${sliderPosition}px)`;
+        }
+        
+        // Auto-slide testimonials
+        setInterval(() => {
+            moveSlider(1);
+        }, 5000);
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // ESC key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>
