@@ -973,4 +973,207 @@
                 
                 <button type="submit" id="submitBtn" class="btn-ripple w-full bg-accent hover:bg-accentHover text-primary font-bold py-3.5 md:py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 text-sm md:text-base">
                     <span id="btnText">Submit Application</span>
-                    <div id="btnSpinner" class
+                    <div id="btnSpinner" class="spinner"></div>
+                </button>
+                <p class="text-[10px] md:text-xs text-center text-gray-500">By submitting, you agree to receive WhatsApp confirmation and callback from our team.</p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        let modalOpen = false;
+        let formSubmitted = false;
+
+        function openModal(source = 'manual') {
+            if (formSubmitted) return;
+            document.getElementById('leadModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            modalOpen = true;
+            console.log('Modal opened via:', source);
+        }
+
+        function openModalWithType(type) {
+            openModal('service_card');
+            document.getElementById('loanType').value = type;
+        }
+
+        function closeModal() {
+            document.getElementById('leadModal').classList.remove('active');
+            document.body.style.overflow = '';
+            modalOpen = false;
+            resetForm();
+        }
+
+        document.getElementById('leadModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+
+        function resetForm() {
+            document.getElementById('leadForm').reset();
+            document.getElementById('btnText').textContent = 'Submit Application';
+            document.getElementById('btnSpinner').style.display = 'none';
+            document.getElementById('submitBtn').disabled = false;
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            if (formSubmitted) return;
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const loanType = document.getElementById('loanType').value;
+            const city = document.getElementById('city').value;
+
+            document.getElementById('btnText').textContent = 'Processing...';
+            document.getElementById('btnSpinner').style.display = 'block';
+            document.getElementById('submitBtn').disabled = true;
+
+            setTimeout(() => {
+                const businessMessage = `New Loan Lead:%0AName: ${name}%0APhone: ${phone}%0ALoan Type: ${loanType}%0ACity: ${city}`;
+                window.open(`https://wa.me/919788417603?text=${businessMessage}`, '_blank');
+
+                setTimeout(() => {
+                    const customerMessage = `Thank you ${name} for applying for ${loanType} with SPK Financial & Loan Services. We have received your application and our team will contact you shortly at ${phone}.%0A%0ARegards,%0ASPK Financial Team`;
+                    window.open(`https://wa.me/91${phone}?text=${customerMessage}`, '_blank');
+                }, 1000);
+
+                formSubmitted = true;
+                sessionStorage.setItem('spk_lead_submitted', 'true');
+                closeModal();
+                showSuccessPopup();
+            }, 1500);
+        }
+
+        function showSuccessPopup() {
+            const popup = document.getElementById('successPopup');
+            popup.classList.add('show');
+            setTimeout(() => popup.classList.remove('show'), 5000);
+        }
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        let scrollTriggered = false;
+        window.addEventListener('scroll', () => {
+            if (formSubmitted || scrollTriggered || modalOpen) return;
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            if (scrollPercent > 60 && !sessionStorage.getItem('spk_scroll_triggered')) {
+                scrollTriggered = true;
+                sessionStorage.setItem('spk_scroll_triggered', 'true');
+                setTimeout(() => {
+                    if (!modalOpen && !formSubmitted) {
+                        openModal('scroll_60percent');
+                    }
+                }, 800);
+            }
+        });
+
+        let exitTriggered = false;
+        document.addEventListener('mouseleave', (e) => {
+            if (formSubmitted || exitTriggered || modalOpen) return;
+            if (e.clientY <= 0 && !sessionStorage.getItem('spk_exit_triggered')) {
+                exitTriggered = true;
+                sessionStorage.setItem('spk_exit_triggered', 'true');
+                if (window.innerWidth > 768) {
+                    setTimeout(() => {
+                        if (!modalOpen && !formSubmitted) {
+                            openModal('exit_intent');
+                        }
+                    }, 300);
+                } else {
+                    document.getElementById('exitBanner').classList.add('show');
+                }
+            }
+        });
+
+        function hideExitBanner() {
+            document.getElementById('exitBanner').classList.remove('show');
+        }
+
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const stickyCta = document.getElementById('stickyCta');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) navbar.classList.add('shadow-lg');
+            else navbar.classList.remove('shadow-lg');
+            
+            if (currentScroll > 500 && window.innerWidth < 768) stickyCta.classList.add('visible');
+            else stickyCta.classList.remove('visible');
+            
+            lastScroll = currentScroll;
+        });
+
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    entry.target.querySelectorAll('.counter').forEach(counter => animateCounter(counter));
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up, .scale-in').forEach(el => observer.observe(el));
+
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    el.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+
+        let sliderPosition = 0;
+        const slider = document.getElementById('testimonialSlider');
+        function moveSlider(direction) {
+            const cards = slider.children;
+            const cardWidth = cards[0].offsetWidth + 24;
+            const maxPosition = -(cards.length - 1) * cardWidth;
+            sliderPosition += direction * -cardWidth;
+            if (sliderPosition > 0) sliderPosition = maxPosition;
+            if (sliderPosition < maxPosition) sliderPosition = 0;
+            slider.style.transform = `translateX(${sliderPosition}px)`;
+        }
+        setInterval(() => moveSlider(1), 5000);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                hideExitBanner();
+            }
+        });
+
+        if (sessionStorage.getItem('spk_lead_submitted')) {
+            formSubmitted = true;
+        }
+    </script>
+</body>
+</html>
